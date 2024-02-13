@@ -1,3 +1,42 @@
 Rails.application.routes.draw do
+  namespace :admin do
+    resources :postes, only: [:index, :show, :edit, :update, :destroy]
+  end
+  namespace :admin do
+    resources :users, only: [:show, :edit, :update]
+  end
+  namespace :admin do
+    get 'admin'=>'homes#top'
+  end
+  
+  scope module: :public do
+    resources :favorites, only: [:index]
+  end
+  
+  scope module: :public do
+    resources :posts, omly: [:new, :create, :show, :edit, :update, :destroy]
+  end
+  
+  get '/searches/search' => 'searches#search', as: 'searches'
+    
+  scope module: :public do
+    get '/users/confirm' => 'users#confirm', as: 'confirm_user'
+    patch '/users/withdraw' => 'users#withdraw',as:'withdraw_user'
+    resources :users, only: [:show, :edit, :update]
+  end
+  
+  scope module: :public do
+    root to:'homes#top'
+  end
+  
+  devise_for :users, skip: [:passwords], controllers: {
+    registrations: "public/registrations",
+    sessions: 'public/sessions'
+  }
+  
+  devise_for :admin, skip: [:registrations, :passwords], controllers: {
+    sessions: "admin/sessions"
+  }
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
+  
 end
