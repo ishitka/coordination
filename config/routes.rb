@@ -1,4 +1,13 @@
 Rails.application.routes.draw do
+  devise_for :users, skip: [:passwords], controllers: {
+    registrations: "public/registrations",
+    sessions: 'public/sessions'
+  }
+  
+  devise_for :admin, skip: [:registrations, :passwords], controllers: {
+    sessions: "admin/sessions"
+  }
+  
   namespace :admin do
     resources :postes, only: [:index, :show, :edit, :update, :destroy]
   end
@@ -17,7 +26,9 @@ Rails.application.routes.draw do
     resources :posts, omly: [:new, :create, :show, :edit, :update, :destroy]
   end
   
-  get '/searches/search' => 'searches#search', as: 'searches'
+  scope module: :public do
+    get '/searches/search' => 'searches#search', as: 'searches'
+  end
     
   scope module: :public do
     get '/users/confirm' => 'users#confirm', as: 'confirm_user'
@@ -29,14 +40,7 @@ Rails.application.routes.draw do
     root to:'homes#top'
   end
   
-  devise_for :users, skip: [:passwords], controllers: {
-    registrations: "public/registrations",
-    sessions: 'public/sessions'
-  }
   
-  devise_for :admin, skip: [:registrations, :passwords], controllers: {
-    sessions: "admin/sessions"
-  }
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
   
 end
