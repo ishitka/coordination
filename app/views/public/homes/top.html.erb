@@ -1,2 +1,10 @@
-<h1>Public::Homes#top</h1>
-<p>Find me in app/views/public/homes/top.html.erb</p>
+<div class="row row-cols-4">
+  <% @posts.each do |post| %>
+    <div class="col">
+      <%= link_to (image_tag post.image,size: "100×100"), post_path(post.id) %></br>
+      <%= post.user.account %>
+      <%= post.sex %>
+    </div>
+  <% end %>
+  <%= paginate @posts %>
+</div>

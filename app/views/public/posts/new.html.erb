@@ -1,2 +1,46 @@
-<h1>Public::Posts#new</h1>
-<p>Find me in app/views/public/posts/new.html.erb</p>
+<div class="container-fluid">
+  <div class="row offset-1 py-3">
+    <h2>新規投稿</h2>
+  </div>
+<%= form_with model: @post,url: posts_path, method: :post do |f| %>
+  <div class="row offset-3 mt-3">
+    <div class="col-3">
+      <p>写真を選択</p>
+    </div>
+    <div class="col-3">
+      <%= f.file_field :image, accept: "image/*",size: "200×200" %>
+    </div>
+  </div>
+  
+  <div class="field row offset-3 mt-3">
+    <div class="col-3">
+      <p>タイトル</p>
+    </div>
+    <div class="col-3">
+      <%= f.text_field :title, style:"width:400px;" %>
+    </div>
+  </div>
+  
+  <div class="field row offset-3 mt-3">
+    <div class="col-3">
+      <p>コーディネートのポイント</p>
+    </div>
+    <div class="col-3">
+      <%= f.text_area :introduction,style:"width:400px; height:200px;" %>
+    </div>
+  </div>
+  
+  <div class="field row offset-3 mt-3">
+    <div class="col-3">
+      <p>性別</p>
+    </div>
+    <div class="col-3">
+      <%= f.select :sex, ['man', 'woman', 'unisex'],{include_blank: '選択してください'} %>
+    </div>
+  </div>
+  
+  <div class="actions text-center pt-5">
+    <%= f.submit '新規投稿', class: "btn btn-success", style:"width:200px;" %>
+  </div>
+<% end %>
+</div>

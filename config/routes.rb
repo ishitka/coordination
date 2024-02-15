@@ -15,7 +15,7 @@ Rails.application.routes.draw do
     resources :users, only: [:show, :edit, :update]
   end
   namespace :admin do
-    get 'admin'=>'homes#top'
+    get 'admin'=>'homes#top',as: 'top'
   end
   
   scope module: :public do
@@ -23,7 +23,7 @@ Rails.application.routes.draw do
   end
   
   scope module: :public do
-    resources :posts, omly: [:new, :create, :show, :edit, :update, :destroy]
+    resources :posts, omly: [:new, :create, :edit, :show, :update, :destroy]
   end
   
   scope module: :public do
