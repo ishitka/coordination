@@ -1,2 +1,49 @@
-<h1>Public::Posts#show</h1>
-<p>Find me in app/views/public/posts/show.html.erb</p>
+<div class="container-fluid">
+  <div class="row offset-1 py-3">
+    <h2>投稿詳細</h2>
+  </div>
+  <% if @post.user.image.attached? %>
+    <%= image_tag @post.user.image(100,100) %>
+  <% else %>
+    <i class='fa-regular fa-user'></i>
+  <% end %>
+  <%= @post.user.name %>
+  <% if current_user %>
+    <%= link_to '編集', edit_post_path %>
+    <%= link_to '削除', post_path(@post), method: :delete, "deta-confirm" => "本当に削除しますか？" %>
+  <% end %></br>
+  <%= image_tag @post.image %></br>
+  <%= @post.sex %>
+  <% if @post.favorited_by?(current_user) %>
+  <p><%= link_to post_favorite_path(@post), method: :delete do %>
+        ♥<%= @post.favorites.count %> いいね
+      <% end %></p>
+  <% else %>
+  <p><%= link_to post_favorite_path(@post), method: :post do %>
+       ♡<%= @post.favorites.count %> いいね
+     <% end %></p>
+  <% end %></br>
+  <%= @post.title %></br>
+  <%= @post.introduction %>
+  
+<div>
+  <p>コメント件数：<%= @post.comments.count %></p>
+  <% @post.comments.each do |comment| %>
+    <% if comment.user.image.attached? %>
+      <%= image_tag cumment.user.image(100,100) %>
+    <% else %>
+      <i class='fa-regular fa-user'></i>
+    <% end %>
+    <%= comment.user.name %>
+    <%= comment.created_at.strftime('%Y/%m/%d') %><%= comment.comment %>
+    <% if comment.user == current_user %>
+      <%= link_to "削除", post_comment_path(comment.post, comment), method: :delete %></br>
+    <% end %>
+  <% end %>
+</div>
+<div>
+  <%= form_with model: [@post, @comment] do |f| %>
+    <%= f.text_area :comment, rows: '5', placeholder: "コメントをここに" %>
+    <%= f.submit "送信する" %>
+  <% end %>
+</div>

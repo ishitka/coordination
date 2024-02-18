@@ -1,5 +1,38 @@
 <% if current_user.id? %>
-<div class="container-fluid">
-  <div class="row offset-1 py-3">
-    <h2></h2>
-  </div>
+  <% if @user.image.attached? %>
+    <%= image_tag current_user.image %>
+  <% else %>
+    <i class='fa-regular fa-user'></i>
+  <% end %></br>
+  <%= @user.account %></br>
+  <%= @user.name %></br>
+  <%= @user.height %>cm</br>
+  <%= @user.introduction %></br>
+  <%= link_to 'プロフィール編集', edit_user_path %></br>
+  <a href='/posts/new'>
+    <i class="fa-solid fa-plus"></i>
+  </a></br>
+  <% @posts.each do |post| %>
+    <%= link_to (image_tag post.image,size: "200×200"), post_path(post.id) %>
+    <%= post.title %>
+  <% end %>
+<% else %>
+  <% if @user.image.attached? %>
+    <%= image_tag @user.image %>
+  <% else %>
+    "<i class='fa-regular fa-user'></i>".html_safe
+  <% end %></br>
+  <%= @user.account(@user.id) %></br>
+  <%= @user.name(@user.id) %></br>
+  <%= @user.height(@user.id) %>cm</br>
+  <%= @user.introduction(@user.id) %></br>
+  <%= link_to 'プロフィール編集', edit_user_path %></br>
+  <a href='/posts/new'>
+    <i class="fa-solid fa-plus"></i>
+  </a>
+  <%= @post.each do |post| %>
+    <%= link_to (image_tag post.image,size: "100×100"), post_path(post.id) %></br>
+    <%= image_tag post.user.get_profile_image(100,100) %>
+    <%= post.title %>
+  <% end %>
+<% end %>

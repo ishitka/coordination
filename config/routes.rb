@@ -19,11 +19,10 @@ Rails.application.routes.draw do
   end
   
   scope module: :public do
-    resources :favorites, only: [:index]
-  end
-  
-  scope module: :public do
-    resources :posts, omly: [:new, :create, :edit, :show, :update, :destroy]
+    resources :posts, omly: [:new, :create, :edit, :show, :update, :destroy] do
+      resource :favorite, only: [:create, :destroy]
+      resources :comments, only: [:create, :destroy]
+    end
   end
   
   scope module: :public do
