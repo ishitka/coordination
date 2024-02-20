@@ -9,6 +9,7 @@
   <%= @user.height %>cm</br>
   <%= @user.introduction %></br>
   <%= link_to 'プロフィール編集', edit_user_path %></br>
+  <%= link_to 'いいね一覧', favorites_user_path(@user) %></br>
   <a href='/posts/new'>
     <i class="fa-solid fa-plus"></i>
   </a></br>
@@ -26,10 +27,6 @@
   <%= @user.name(@user.id) %></br>
   <%= @user.height(@user.id) %>cm</br>
   <%= @user.introduction(@user.id) %></br>
-  <%= link_to 'プロフィール編集', edit_user_path %></br>
-  <a href='/posts/new'>
-    <i class="fa-solid fa-plus"></i>
-  </a>
   <%= @post.each do |post| %>
     <%= link_to (image_tag post.image,size: "100×100"), post_path(post.id) %></br>
     <%= image_tag post.user.get_profile_image(100,100) %>

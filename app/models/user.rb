@@ -18,5 +18,19 @@ class User < ApplicationRecord
   validates :email, uniqueness: true
   validates :telephone_number, uniqueness: true
   validates :account, uniqueness: true
+  
+  def self.looks(search, word)
+    if search == "perfect_match"
+      @user = User.where("account LIKE?", "#{ward}")
+    elsif search == "forward_match"
+      @user = User.where("account LIKE?", "#{word}%")
+    elsif search == "backward_match"
+      @user = User.where("account LIKE?", "%#{word}")
+    elsif search == "partial_match"
+      @user = User.where("account LIKE?", "%#{word}%")
+    else
+      @user = User.all
+    end
+  end
 
 end

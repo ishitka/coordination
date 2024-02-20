@@ -4,7 +4,17 @@
       <%= link_to (image_tag post.image,size: "100×100"), post_path(post.id) %></br>
       <%= post.user.account %>
       <%= post.sex %>
+      <%= post.user.height %>
+      <%= post.title %>
     </div>
   <% end %>
+  <div class="search_from">
+    <%= form_with url: search_path, local: true, method: :get do |f| %>
+      <%= f.select :sex, ['man', 'woman', 'unisex'] %>
+      <%= f.submit "絞り込み", class: "btn btn-primary" %>
+    <% end %>
+  </div>
+  
   <%= paginate @posts %>
-</div>
+  
+  

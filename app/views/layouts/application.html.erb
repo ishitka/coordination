@@ -15,7 +15,7 @@
     <header class="shadow-sm">
       <nav class="navbar navbar-expand-lg navbar-light">
         <div class="container">
-          <a class="navbar-brand p-3" href=root_path>LOGO</a>
+          <a class="navbar-brand p-3" href='/'>LOGO</a>
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
                         aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -24,7 +24,7 @@
             <ul class="navbar-nav ml-auto">
             <% if user_signed_in? %>
             <li class="nav-item">
-              <%= link_to 'ユーザー検索', searches_path, class: 'nav-link text-dark' %>
+              <%= link_to 'ユーザー検索', search_path, class: 'nav-link text-dark' %>
             </li>
             <li class="nav-item">
               <%= link_to 'マイページ', user_path(current_user.id), class: 'nav-link text-dark' %>
@@ -34,7 +34,7 @@
             </li>
             <% elsif admin_signed_in? %>
             <li class="nav-item">
-              <%= link_to 'ユーザー検索', searches_path, class: 'nav-link text-dark' %>
+              <%= link_to 'ユーザー検索', search_path, class: 'nav-link text-dark' %>
             </li>
             <li class="nav-item">
               <%= link_to '会員一覧', admin_top_path, class: 'nav-link text-dark' %>
@@ -47,7 +47,7 @@
             </li>
             <% else %>
             <li class="nav-item">
-              <%= link_to 'ユーザー検索', searches_path, class: 'nav-link text-dark' %>
+              <%= link_to 'ユーザー検索', search_path, class: 'nav-link text-dark' %>
             </li>
             <li class="nav-item">
               <%= link_to "新規登録", new_user_registration_path, class: 'nav-link text-dark' %>
@@ -60,6 +60,15 @@
           </div>
         </div>
       </nav>
+      <div class = "search_from">
+        <%= form_with url: search_path, local: true, method: :get do |f| %>
+          <%= f.text_field :word %>
+          <%= f.select :range, options_for_select([[:'User'],['Post']]) %>
+          <%= f.select :serch, options_for_select([[:"完全一致","perfect_match"], ["前方一致","forward_match"], ["後方一致","backward_match"], ["部分一致","partial_match"]]) %>
+          <%= f.submit "検索", class: "btn btn-primary" %>
+        <% end %>
+      </div>
+
     </header>
     <main class="mb-auto">
     <%= yield %>

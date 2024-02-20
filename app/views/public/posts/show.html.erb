@@ -3,11 +3,11 @@
     <h2>投稿詳細</h2>
   </div>
   <% if @post.user.image.attached? %>
-    <%= image_tag @post.user.image(100,100) %>
+    <%= image_tag @post.user.image %>
   <% else %>
     <i class='fa-regular fa-user'></i>
   <% end %>
-  <%= @post.user.name %>
+  <%= @post.user.account %>
   <% if current_user %>
     <%= link_to '編集', edit_post_path %>
     <%= link_to '削除', post_path(@post), method: :delete, "deta-confirm" => "本当に削除しますか？" %>
@@ -30,7 +30,7 @@
   <p>コメント件数：<%= @post.comments.count %></p>
   <% @post.comments.each do |comment| %>
     <% if comment.user.image.attached? %>
-      <%= image_tag cumment.user.image(100,100) %>
+      <%= image_tag cumment.user.image %>
     <% else %>
       <i class='fa-regular fa-user'></i>
     <% end %>

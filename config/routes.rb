@@ -8,6 +8,12 @@ Rails.application.routes.draw do
     sessions: "admin/sessions"
   }
   
+  scope module: :public do
+    root to:'homes#top' do
+      
+    end
+  end
+  
   namespace :admin do
     resources :postes, only: [:index, :show, :edit, :update, :destroy]
   end
@@ -26,18 +32,21 @@ Rails.application.routes.draw do
   end
   
   scope module: :public do
-    get '/searches/search' => 'searches#search', as: 'searches'
+    get 'search' => 'searches#search'
   end
-    
+  
+
   scope module: :public do
     get '/users/confirm' => 'users#confirm', as: 'confirm_user'
     patch '/users/withdraw' => 'users#withdraw',as:'withdraw_user'
-    resources :users, only: [:show, :edit, :update]
+    resources :users, only: [:show, :edit, :update] do
+      member do
+        get :favorites
+      end
+    end
   end
   
-  scope module: :public do
-    root to:'homes#top'
-  end
+  
   
   
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html

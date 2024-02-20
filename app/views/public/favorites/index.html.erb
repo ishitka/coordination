@@ -1,2 +1,20 @@
-<h1>Public::Favorites#index</h1>
-<p>Find me in app/views/public/favorites/index.html.erb</p>
+<div class="container-fluid">
+  <div class="row offset-1 py-3">
+    <h2>いいね一覧</h2>
+  </div>
+  
+  <table class="table table-hover table-inverse">
+    <% if liked_posts attached? %>
+      <tbody>
+        <% @liked_posts.each do |post| %>
+          <tr>
+            <td>
+              <td><%= link_to (image_tag post.image), post_path(post.id) %></td>
+              <td><%= link_to (post.title), post_path(post.id) %></td>
+            </td>
+          </tr>
+      </tbody>
+    <% else %>
+      <h2>いいねはまだありません</h2>
+    </table>
+</div>

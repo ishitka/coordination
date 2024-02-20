@@ -1,0 +1,30 @@
+<div class="container-fluid">
+  <div class="row offset-1 py-3">
+    <h2>いいね一覧</h2>
+  </div>
+  
+  <table class="table">
+    <tbody>
+      <% @favorite_posts.each do |post| %>
+      <tr>
+        <td>
+          <%= link_to image_tag(post.image), post_path(post.id) %>
+        </td>
+        <td>
+          <%= link_to post.user.account, user_path(post.user.id) %>
+        </td>
+        <td>
+          <%= post.sex %>
+        </td>
+        <td>
+          <%= post.user.height %>
+        </td>
+        <td>
+          <%= post.title %>
+        </td>
+      </tr>
+      <% end %>
+     </tbody>
+  </table>
+  
+</div>
