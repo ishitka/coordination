@@ -8,7 +8,7 @@
     <i class='fa-regular fa-user'></i>
   <% end %>
   <%= @post.user.account %>
-  <% if current_user %>
+  <% if @post.user.id == current_user.id %>
     <%= link_to '編集', edit_post_path %>
     <%= link_to '削除', post_path(@post), method: :delete, "deta-confirm" => "本当に削除しますか？" %>
   <% end %></br>
