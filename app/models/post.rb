@@ -9,7 +9,7 @@ class Post < ApplicationRecord
     favorites.exists?(user_id: user.id)
   end
   
-  enum sex: { man: 0,women: 1,unisex: 2 }
+  enum sex: { man: 0,woman: 1,unisex: 2 }
   
   def self.looks(search, word, sex)
     if search == "perfect_match"

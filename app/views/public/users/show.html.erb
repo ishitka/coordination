@@ -1,3 +1,7 @@
+<div class="container-fluid">
+  <div class="row offset-1 py-3">
+    <h2><%= @user.account %>さんの詳細ページ</h2>
+  </div>
 <% if @user.id == current_user.id %>
   <% if @user.image.attached? %>
     <%= image_tag @user.image %>
@@ -5,11 +9,9 @@
     <i class='fa-regular fa-user'></i>
   <% end %></br>
   <%= @user.account %></br>
-  <%= @user.name %></br>
-  <%= @user.height %>cm</br>
+  <%= @user.name %>/<%= @user.height %>cm</br>
   <%= @user.introduction %></br>
-  <%= link_to "フォロー数:#{@user.followings.count}", user_followings_path(@user.id) %>
-  <%= link_to "フォロワー数:#{@user.followers.count}",user_followers_path(@user.id) %></br>
+  <%= link_to "フォロー数:#{@user.followings.count}", user_followings_path(@user.id) %>/<%= link_to "フォロワー数:#{@user.followers.count}",user_followers_path(@user.id) %></br>
   <% if @user.id == current_user.id %>
     <%= link_to 'プロフィール編集', edit_user_path %></br>
     <%= link_to 'いいね一覧', favorites_user_path(@user) %></br>
@@ -23,6 +25,7 @@
   <a href='/posts/new'>
     <i class="fa-solid fa-plus"></i>
   </a></br>
+  
   <% @posts.each do |post| %>
     <%= link_to (image_tag post.image,size: "200×200"), post_path(post.id) %>
     <%= post.title %>
@@ -43,3 +46,4 @@
     <%= post.title %>
   <% end %>
 <% end %>
+</div>

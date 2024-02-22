@@ -1,0 +1,17 @@
+<div class="container-fluid">
+  <div class="row offset-1 py-3">
+    <h2>フォロワー 一覧</h2>
+  </div>
+  <% if @users.exists? %>
+    <% @users.each do |user| %>
+      <% if user.image.attached? %>
+        <%= image_tag user.image %>
+      <% else %>
+        <i class='fa-regular fa-user'></i>
+      <% end %></br>
+    <%= user.account %>
+    <% end %>
+  <% else %>
+    <p>ユーザーはいません</p>
+  <% end %>
+</div>

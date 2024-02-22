@@ -1,0 +1,47 @@
+<div class="container-fluid">
+  <div class="row offset-1 py-3">
+    <h2>検索結果一覧</h2>
+  </div>
+  
+  <table class="table table-hover table-inverse">
+    <% if @range == "User" %>
+      <tbody>
+        <% @users.each do |user| %>
+          <tr>
+            <td>
+              <% if user.image.attached? %>
+                <%= image_tag user.image %>
+              <% else %>
+                "<i class='fa-regular fa-user'></i>"
+              <% end %>
+            </td>
+            <td><%= link_to user.account,admin_user_path(user.id) %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    <% else %>
+      <tbody>
+        <% @posts.each do |post| %>
+          <% if params[:sex].present? %> 
+            <% if params[:sex] == post.sex %>
+              <tr>
+                <td><%= link_to (image_tag post.image), admin_post_path(post.id) %></td>
+                <td><%= post.user.account %></td>
+                <td><%= post.sex %></td>
+                <td><%= post.user.height %></td>
+                <td><%= post.title %></td>
+              </tr>
+            <% end %>
+          <% else %>
+            <% if @range == "Post" %>
+              <tr>
+                <td><%= link_to (image_tag post.image), admin_post_path(post.id) %></td>
+                <td><%= link_to (post.title), admin_post_path(post.id) %></td>
+              </tr>
+            <% end %>
+          <% end %>
+        <% end %>
+      </tbody>
+    <% end %>
+  </table>
+</div>

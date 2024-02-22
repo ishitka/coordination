@@ -1,4 +1,11 @@
 Rails.application.routes.draw do
+  namespace :admin do
+    get 'searches/search'
+  end
+  namespace :admin do
+    get 'relationships/followings'
+    get 'relationships/followers'
+  end
   namespace :public do
     get 'relationships/followings'
     get 'relationships/followers'
@@ -21,11 +28,21 @@ Rails.application.routes.draw do
   end
   
   namespace :admin do
-    resources :postes, only: [:index, :show, :edit, :update, :destroy]
+    get 'search' => 'searches#search'
   end
+  
   namespace :admin do
-    resources :users, only: [:show, :edit, :update]
+    resources :posts, only: [:index, :show, :edit, :update, :destroy]
   end
+  
+  namespace :admin do
+    resources :users, only: [:show, :edit, :update] do
+      resource :relationships, only:[:create, :destroy]
+        get 'followings' => 'relationships#followings', as: 'followings'
+        get 'followers' => 'relationships#followers', as: 'followers'
+    end
+  end
+  
   namespace :admin do
     get 'admin'=>'homes#top',as: 'top'
   end
