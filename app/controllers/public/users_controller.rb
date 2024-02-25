@@ -6,12 +6,14 @@ class Public::UsersController < ApplicationController
   end
 
   def edit
-    @user = current_user
+    is_matching_login_user
+    @user = User.find(params[:id])
   end
 
   def update
+    is_matching_login_user
     if User.update(user_params)
-      redirect_to admin_user_path(current_user)
+      redirect_to user_path(current_user)
     else
       render :edit
     end
@@ -27,10 +29,15 @@ class Public::UsersController < ApplicationController
   end
   
   def favorites
-    @user = User.find(params[:id])
-    favorites = Favorite.where(user_id: @user.id).pluck(:post_id)
-    @favorite_posts = Post.find(favorites)
-    @post = Post.find(params[:id])
+    if user_signed_in?
+      @user = User.find(params[:id])
+      favorites = Favorite.where(user_id: @user.id).pluck(:post_id)
+      @favorite_posts = Post.find(favorites)
+      @post = Post.find(params[:id])
+    else
+      flash[:notice] = "フォローするにはログインしてください"
+      redirect_to new_user_session_path
+    end
   end
   
   private
@@ -41,5 +48,12 @@ class Public::UsersController < ApplicationController
   
   def set_user
     @user = User.find(params[:id])
+  end
+  
+  def is_matching_login_user
+    user = User.find(params[:id])
+    unless user.id == current_user.id
+      redirect_to root_path
+    end
   end
 end

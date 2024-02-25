@@ -9,7 +9,8 @@ class Public::PostsController < ApplicationController
     if  @post.save
       redirect_to root_path
     else
-      new_post_path
+      flash[:alert] = "投稿に失敗しました"
+      redirect_to new_post_path
     end
   end
 

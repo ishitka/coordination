@@ -5,8 +5,13 @@ class Post < ApplicationRecord
   belongs_to :user
   has_many :favorites, dependent: :destroy
   
+  validates :title, presence: true
+  validates :introduction, presence: true
+  validates :image, presence: true
+  validates :sex, presence: true
+  
   def favorited_by?(user)
-    favorites.exists?(user_id: user.id)
+    user.present? && favorites.exists?(user_id: user.id)
   end
   
   enum sex: { man: 0,woman: 1,unisex: 2 }

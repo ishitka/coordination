@@ -2,16 +2,29 @@
   <div class="row offset-1 py-3">
     <h2>フォロワー 一覧</h2>
   </div>
-  <% if @users.exists? %>
-    <% @users.each do |user| %>
-      <% if user.image.attached? %>
-        <%= image_tag user.image %>
+  
+  <table class="table table-hover table-inverse">
+    <tbody>
+      <% if @users.exists? %>
+        <% @users.each do |user| %>
+          <tr>
+            <td>
+              <div class="row">
+                <% if user.image.attached? %>
+                  <%= image_tag user.image, size:"100x100", class: "mt-3 rounded-circle"; %>
+                <% else %>
+                  <%= image_tag 'no_image', size: "100x100", class: "mt-3 rounded-circle"; %>
+                <% end %></br>
+                <div class="col my-auto">
+                  <%= link_to user.account,user_path(user.id) %></br>
+                  <%= user.name %>
+                </div>
+        <% end %>
       <% else %>
-        <i class='fa-regular fa-user'></i>
-      <% end %></br>
-    <%= user.account %>
-    <% end %>
-  <% else %>
-    <p>ユーザーはいません</p>
-  <% end %>
+        <p>ユーザーはいません</p>
+      <% end %>
+              </div>
+            </td>
+          </tr>
+    </tbody>
 </div>

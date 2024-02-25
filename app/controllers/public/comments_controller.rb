@@ -2,10 +2,15 @@ class Public::CommentsController < ApplicationController
   
   def create
     post = Post.find(params[:post_id])
-    comment = current_user.comments.new(comment_params)
-    comment.post_id = post.id
-    comment.save
-    redirect_to post_path(post)
+    
+    if user_signed_in?
+      comment = current_user.comments.new(comment_params)
+      comment.post_id = post.id
+      comment.save
+      redirect_to post_path(post)
+    else
+      redirect_to new_user_session_path
+    end
   end
   
   def destroy

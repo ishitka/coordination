@@ -4,12 +4,12 @@
   </div>
   
   <table class="table table-hover table-inverse">
-    <% if liked_posts attached? %>
+    <% if favorited_posts attached? %>
       <tbody>
-        <% @liked_posts.each do |post| %>
+        <% @favorite_posts.each do |post| %>
           <tr>
             <td>
-              <td><%= link_to (image_tag post.image), post_path(post.id) %></td>
+              <td><%= link_to(image_tag(post.image, size: "200x200"), post_path(post.id) %></td>
               <td><%= link_to (post.title), post_path(post.id) %></td>
             </td>
           </tr>

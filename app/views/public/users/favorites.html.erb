@@ -3,28 +3,23 @@
     <h2>いいね一覧</h2>
   </div>
   
-  <table class="table">
-    <tbody>
+  <div class="card-list-container">
+    <div class="d-flex flex-row flex-wrap text-center">
       <% @favorite_posts.each do |post| %>
-      <tr>
-        <td>
-          <%= link_to image_tag(post.image), post_path(post.id) %>
-        </td>
-        <td>
-          <%= link_to post.user.account, user_path(post.user.id) %>
-        </td>
-        <td>
-          <%= post.sex %>
-        </td>
-        <td>
-          <%= post.user.height %>
-        </td>
-        <td>
-          <%= post.title %>
-        </td>
-      </tr>
+        <div class="card shadow-lg" style="width:300px;">
+          <%= link_to(image_tag(post.image, size: "200x200"), post_path(post.id), class: "card-img-top text-center") %>
+          <div class="card-body">
+            <div class="row">
+              <div class="col-10">
+                <div class="card-title">
+                  <%= link_to post.user.account, user_path(post.user.id) %></br>
+                  <%= post.sex %> | <%= post.user.height %>cm</br>
+                  <%= post.title %>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       <% end %>
-     </tbody>
-  </table>
   
 </div>

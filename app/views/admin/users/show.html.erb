@@ -2,7 +2,7 @@
   <div class="row offset-1 py-3">
     <h2><%= @user.account %>さんの詳細ページ</h2>
   </div>
-  
+
   <% if @user.image.attached? %>
     <%= image_tag @user.image %>
   <% else %>

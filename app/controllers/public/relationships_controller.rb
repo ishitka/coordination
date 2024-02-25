@@ -1,7 +1,11 @@
 class Public::RelationshipsController < ApplicationController
-  def create
-    current_user.follow(params[:user_id])
-    redirect_to request.referer
+   def create
+    if user_signed_in?
+      current_user.follow(params[:user_id])
+      redirect_to request.referer
+    else
+      redirect_to new_user_session_path
+    end
   end
   
   def destroy

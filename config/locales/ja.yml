@@ -1,5 +1,8 @@
 ja:
   enums:
+   errors:
+    messages:
+      not_saved: "エラーが発生したため、保存されませんでした。"
     
   activerecord:
     errors:

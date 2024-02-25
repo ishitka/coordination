@@ -1,4 +1,12 @@
 <h2>Sign up</h2>
+<% if @user.errors.any? %>
+  <%= @user.errors.count %>件のエラーが発生しました
+  <ul>
+    <% @user.errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+    <% end %>
+  </ul>
+<% end %>
 
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
   <%= render "admins/shared/error_messages", resource: resource %>
