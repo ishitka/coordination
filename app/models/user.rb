@@ -22,6 +22,7 @@ class User < ApplicationRecord
   validates :telephone_number, uniqueness: true
   validates :account, uniqueness: true
   
+
   def self.looks(search, word)
     if search == "perfect_match"
       @user = User.where("account LIKE?", "#{ward}")

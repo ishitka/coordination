@@ -9,13 +9,18 @@
         <% @users.each do |user| %>
           <tr>
             <td>
+              <div class="row">
               <% if user.image.attached? %>
-                <%= image_tag user.image %>
+                <%= image_tag user.image, size:"100x100", class: "mt-3 rounded-circle"; %>
               <% else %>
-                "<i class='fa-regular fa-user'></i>"
+                <%= image_tag 'no_image', size: "100x100", class: "mt-3 rounded-circle"; %>
               <% end %>
+              <div class="col my-auto">
+              <%= link_to user.account,admin_user_path(user.id) %></br>
+              <%= user.name %>
+              </div>
+              </div>
             </td>
-            <td><%= link_to user.account,admin_user_path(user.id) %></td>
           </tr>
         <% end %>
       </tbody>
@@ -25,8 +30,8 @@
           <% if params[:sex].present? %> 
             <% if params[:sex] == post.sex %>
               <tr>
-                <td><%= link_to (image_tag post.image), admin_post_path(post.id) %></td>
-                <td><%= post.user.account %></td>
+                <td><%= link_to(image_tag(post.image, size: "100x100"), admin_post_path(post.id), class: "card-img-top text-center") %></td>
+                <td><%= link_to post.user.account,admin_user_path(post.user_id) %></td>
                 <td><%= post.sex %></td>
                 <td><%= post.user.height %></td>
                 <td><%= post.title %></td>
@@ -35,8 +40,10 @@
           <% else %>
             <% if @range == "Post" %>
               <tr>
-                <td><%= link_to (image_tag post.image), admin_post_path(post.id) %></td>
-                <td><%= link_to (post.title), admin_post_path(post.id) %></td>
+                <td>
+                  <%= link_to(image_tag(post.image, size: "100x100"), admin_post_path(post.id), class: "card-img-top text-center") %>
+                  <%= link_to (post.title), admin_post_path(post.id) %>
+                </td>
               </tr>
             <% end %>
           <% end %>
@@ -45,3 +52,4 @@
     <% end %>
   </table>
 </div>
+
