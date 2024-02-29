@@ -1,11 +1,10 @@
 Rails.application.routes.draw do
-  namespace :admin do
-    get 'searches/search'
-  end
+
   namespace :admin do
     get 'relationships/followings'
     get 'relationships/followers'
   end
+  
   namespace :public do
     get 'relationships/followings'
     get 'relationships/followers'

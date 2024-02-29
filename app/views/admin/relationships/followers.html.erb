@@ -2,10 +2,10 @@
   <div class="row offset-1 py-3">
     <h2>フォロワー 一覧</h2>
   </div>
-  
-  <table class="table table-hover table-inverse">
-    <tbody>
-      <% if @users.exists? %>
+
+  <% if @users.exists? %>
+    <table class="table table-hover table-inverse">
+      <tbody>
         <% @users.each do |user| %>
           <tr>
             <td>
@@ -19,12 +19,13 @@
                   <%= link_to user.account,admin_user_path(user.id) %></br>
                   <%= user.name %>
                 </div>
-        <% end %>
-      <% else %>
-        <p>ユーザーはいません</p>
-      <% end %>
               </div>
             </td>
           </tr>
-    </tbody>
+        <% end %>
+      </tbody>
+    </table>
+  <% else %>
+    <h4>ユーザーはいません</h4>
+  <% end %>
 </div>

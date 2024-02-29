@@ -15,10 +15,10 @@
     <header class="shadow-sm">
       <nav class="navbar navbar-expand-lg navbar-light">
         <div class="container">
-          <% if user_signed_in? %>
-            <a class="navbar-brand p-3" href='/'>LOGO</a>
-          <% elsif admin_signed_in? %>
+          <% if admin_signed_in? %>
             <a class="navbar-brand p-3" , href="<%= admin_posts_path %>" >LOGO</a>
+          <% else %>
+            <a class="navbar-brand p-3" href='/'>LOGO</a>
           <% end %>
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
                         aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
@@ -27,37 +27,37 @@
           <div class="collapse navbar-collapse" id="navbarNavDropdown">
             <ul class="navbar-nav ml-auto">
             <% if user_signed_in? %>
-            <li class="nav-item">
-              <%= link_to 'ユーザー検索', search_path, class: 'nav-link text-dark' %>
+            <li class="nav-item mr-3">
+              <%= link_to 'ユーザー検索', search_path, class: 'nav-link btn btn-info text-white' %>
+            </li>
+            <li class="nav-item mr-3">
+              <%= link_to 'マイページ', user_path(current_user.id), class: 'nav-link btn btn-info text-white' %>
             </li>
             <li class="nav-item">
-              <%= link_to 'マイページ', user_path(current_user.id), class: 'nav-link text-dark' %>
-            </li>
-            <li class="nav-item">
-              <%= link_to "ログアウト", destroy_user_session_path, method: :delete, class: 'nav-link text-dark' %>
+              <%= link_to "ログアウト", destroy_user_session_path, method: :delete, class: 'nav-link btn btn-danger text-white' %>
             </li>
             <% elsif admin_signed_in? %>
-            <li class="nav-item">
-              <%= link_to 'ユーザー検索', search_path, class: 'nav-link text-dark' %>
+            <li class="nav-item mr-3">
+              <%= link_to 'ユーザー検索', search_path, class: 'nav-link btn btn-info text-white' %>
+            </li>
+            <li class="nav-item mr-3">
+              <%= link_to '会員一覧', admin_top_path, class: 'nav-link btn btn-info text-white' %>
+            </li>
+            <li class="nav-item mr-3">
+              <%= link_to '投稿一覧', admin_posts_path, class: 'nav-link btn btn-info text-white' %>
             </li>
             <li class="nav-item">
-              <%= link_to '会員一覧', admin_top_path, class: 'nav-link text-dark' %>
-            </li>
-            <li class="nav-item">
-              <%= link_to '投稿一覧', admin_posts_path, class: 'nav-link text-dark' %>
-            </li>
-            <li class="nav-item">
-              <%= link_to "ログアウト", destroy_admin_session_path, method: :delete, class: 'nav-link text-dark' %>
+              <%= link_to "ログアウト", destroy_admin_session_path, method: :delete, class: 'nav-link btn btn-danger text-white' %>
             </li>
             <% else %>
-            <li class="nav-item">
-              <%= link_to 'ユーザー検索', search_path, class: 'nav-link text-dark' %>
+            <li class="nav-item mr-3">
+              <%= link_to 'ユーザー検索', search_path, class: 'nav-link btn btn-info text-white' %>
+            </li>
+            <li class="nav-item mr-3">
+              <%= link_to "新規登録", new_user_registration_path, class: 'nav-link btn btn-secondary text-white' %>
             </li>
             <li class="nav-item">
-              <%= link_to "新規登録", new_user_registration_path, class: 'nav-link text-dark' %>
-            </li>
-            <li class="nav-item">
-              <%= link_to "ログイン", new_user_session_path, class: 'nav-link text-dark' %>
+              <%= link_to "ログイン", new_user_session_path, class: 'nav-link btn btn-primary text-white' %>
             </li>
             <% end %>
             </ul>
@@ -69,7 +69,7 @@
           <%= form_with url: admin_search_path, local: true, method: :get do |f| %>
             <%= f.text_field :word %>
             <%= f.select :range, options_for_select([[:'User'],['Post']]) %>
-            <%= f.select :serch, options_for_select([[:"完全一致","perfect_match"], ["前方一致","forward_match"], ["後方一致","backward_match"], ["部分一致","partial_match"]]) %>
+            <%= f.select :search, options_for_select([[:"完全一致","perfect_match"], ["前方一致","forward_match"], ["後方一致","backward_match"], ["部分一致","partial_match"]]) %>
             <%= f.submit "検索", class: "btn btn-primary" %>
           <% end %>
         </div>
@@ -78,7 +78,7 @@
           <%= form_with url: search_path, local: true, method: :get do |f| %>
             <%= f.text_field :word %>
             <%= f.select :range, options_for_select([[:'User'],['Post']]) %>
-            <%= f.select :serch, options_for_select([[:"完全一致","perfect_match"], ["前方一致","forward_match"], ["後方一致","backward_match"], ["部分一致","partial_match"]]) %>
+            <%= f.select :search, options_for_select([[:"完全一致","perfect_match"], ["前方一致","forward_match"], ["後方一致","backward_match"], ["部分一致","partial_match"]]) %>
             <%= f.submit "検索", class: "btn btn-primary" %>
           <% end %>
         </div>
@@ -86,7 +86,10 @@
 
     </header>
     <main class="mb-auto">
-    <%= yield %>
+      <% flash.each do |message_type, message| %>
+        <div class="flash-message <%= message_type %>"><%= message %></div>
+      <% end %>
+      <%= yield %>
     </main>
     <footer class="bg-dark text-white pt-5 pb-4">
       <div class="container">

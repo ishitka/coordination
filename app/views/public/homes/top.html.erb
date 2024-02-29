@@ -7,14 +7,14 @@
 <div class="card-list-container">
   <div class="d-flex flex-row flex-wrap text-center">
     <% @posts.each do |post| %>
-    <div class="card shadow-lg" style="width:300px;">
+    <div class="card shadow-lg col-3">
       <%= link_to(image_tag(post.image, size: "200x200"), post_path(post.id), class: "card-img-top text-center") %></br>
       <div class="card-body">
         <div class="row">
           <div class="col-10">
             <div class="card-title">
               <%= post.user.account %></br>
-              <%= post.sex %>|<%= post.user.height %>cm</br>
+              <%= post.sex %> | <%= post.user.height %>cm</br>
               <%= post.title %></br>
               <%= link_to "#{post.comments.count} コメント", post_path(post.id), class: "text-dark" %>
             </div>
