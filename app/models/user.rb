@@ -7,6 +7,7 @@ class User < ApplicationRecord
   
   has_many :posts, dependent: :destroy
   has_many :favorites, dependent: :destroy
+  has_many :favorite_posts, through: :favorites, source: :post
   has_many :comments, dependent: :destroy
   has_many :relationships, class_name: "Relationship", foreign_key: "follower_id", dependent: :destroy
   has_many :reverse_of_relationships, class_name: "Relationship", foreign_key: "followed_id", dependent: :destroy
@@ -14,13 +15,13 @@ class User < ApplicationRecord
   has_many :followings, through: :relationships, source: :followed
   has_many :followers, through: :reverse_of_relationships, source: :follower
 
-  validates :name, presence: { message: 'は必須事項です' }
-  validates :account, presence: { message: 'は必須事項です' }
-  validates :account, format: { with: /\A.*@.*\z/, message: "アカウントIDには@を含める必要があります" }
-  validates :telephone_number, presence: { message: 'は必須事項です' }
-  validates :email, uniqueness: true
-  validates :telephone_number, uniqueness: true
-  validates :account, uniqueness: true
+  validates :name, presence: { message: 'は必須事項です' }, allow_blank: false
+  validates :account, presence: { message: 'は必須事項です' }, allow_blank: false
+  validates :account, format: { with: /\A.*@.*\z/, message: "には@を含める必要があります" }, allow_blank: false
+  validates :telephone_number, presence: { message: 'は必須事項です' }, allow_blank: false
+  validates :email, uniqueness: { message: "すでに登録されています" }, allow_blank: true # 入力がない場合にも一意性チェックを行いたい場合、allow_blank: true
+  validates :telephone_number, uniqueness: { message: "すでに登録されています" }, allow_blank: true # 入力がない場合にも一意性チェックを行いたい場合、allow_blank: true
+  validates :account, uniqueness: { message: "すでに登録されています" }, allow_blank: true 
   
 
   def self.looks(search, word)

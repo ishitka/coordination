@@ -4,57 +4,55 @@
   </div>
   <%= form_with model: @user ,url:admin_user_path(@user.id) do |f| %>
     <div class="row offset-3 mt-3">
-    <div class="col-3">
-      <p>写真を選択</p>
+      <div class="col-3">
+        <p>写真を選択</p>
+      </div>
+      <div class="col-3">
+        <%= f.file_field :image, accept: "image/*" %>
+      </div>
     </div>
-    <div class="col-3">
-      <%= f.file_field :image, accept: "image/*" %>
-    </div>
-  </div>
   
-  <div class="row offset-3 mt-3">
-    <div class="col-3">
-      <p>ユーザーID</p>
+    <div class="row offset-3 mt-3">
+      <div class="col-3">
+        <p>ユーザーID</p>
+      </div>
+      <div class="col-3">
+        <%= f.text_field :account, style:"width:400px;" %>
+      </div>
     </div>
-    <div class="col-3">
-      <%= f.text_field :account, style:"width:400px;" %>
-    </div>
-  </div>
   
-   <div class="row offset-3 mt-3">
-    <div class="col-3">
-      <p>身長</p>
+    <div class="row offset-3 mt-3">
+      <div class="col-3">
+        <p>身長</p>
+      </div>
+      <div class="col-3">
+        <%= f.text_field :height %>cm
+      </div>
     </div>
-    <div class="col-3">
-      <%= f.text_field :height %>cm
-    </div>
-  </div>
   
-  <div class="row offset-3 mt-3">
-    <div class="col-3">
-      <p>自己紹介</p>
-    </div>
-    <div class="col-3">
+    <div class="row offset-3 mt-3">
+      <div class="col-3">
+        <p>自己紹介</p>
+      </div>
+      <div class="col-3">
       <%= f.text_area :introduction, style:"width:400px; height:200px;" %>
+      </div>
     </div>
-  </div>
   
-  <div class="row offset-3 mt-3">
-    <div class="col-3">
-      <p>自己紹介</p>
+    <div class="row offset-3 mt-3">
+      <div class="col-3">
+        <p>自己紹介</p>
+      </div>
+      <div class="col-3">
+        <%= f.radio_button :is_active, "true" %>
+        <%= f.label :is_active_true, "有効" %>
+        <%= f.radio_button :is_active, "false" %>
+        <%= f.label :is_active_false, "退会" %>
+      </div>
     </div>
-    <div class="col-3">
-      <%= f.radio_button :is_active, "true" %>
-      <%= f.label :is_active_true, "有効" %>
-      <%= f.radio_button :is_active, "false" %>
-      <%= f.label :is_active_false, "退会" %>
-    </div>
-  </div>
   
-  <div class="actions text-center pt-5">
-    <%= f.submit '変更内容を保存', class: "btn btn-success", style:"width:300px;" %>
-  </div>
-<% end %>
-
-<%= link_to "退会する", confirm_user_path %>
+    <div class="actions text-center pt-5">
+      <%= f.submit '変更内容を保存', class: "btn btn-success", style:"width:300px;" %>
+    </div>
+  <% end %>
 </div>

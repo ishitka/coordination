@@ -5,21 +5,40 @@
   
   <div class="card-list-container">
     <div class="d-flex flex-row flex-wrap text-center">
-      <% @favorite_posts.each do |post| %>
-        <div class="card shadow-lg" style="width:300px;">
-          <%= link_to(image_tag(post.image, size: "200x200"), post_path(post.id), class: "card-img-top text-center") %>
-          <div class="card-body">
-            <div class="row">
-              <div class="col-10">
-                <div class="card-title">
-                  <%= link_to post.user.account, user_path(post.user.id) %></br>
-                  <%= post.sex %> | <%= post.user.height %>cm</br>
-                  <%= post.title %>
+      <% if @favorite_posts.present? %>
+        <% @favorite_posts.each do |post| %>
+          <div class="card shadow-lg col-3">
+            <%= link_to(image_tag(post.image, size: "200x200"), post_path(post.id), class: "card-img-top text-center") %></br>
+            <div class="card-body">
+              <div class="row">
+                <div class="col-10">
+                  <div class="card-title">
+                    <% if post.favorited_by?(current_user) %>
+                      <p><%= link_to post_favorite_path(post), method: :delete do %>
+                         ♥<%= post.favorites.count %> いいね
+                         <% end %></p>
+                    <% else %>
+                      <p><%= link_to post_favorite_path(post), method: :post do %>
+                         ♡<%= post.favorites.count %> いいね
+                         <% end %></p>
+                    <% end %></br>
+                    <%= link_to (post.user.account),user_path(post.user) %></br>
+                    <%= post.sex %> | <%= post.user.height %>cm</br>
+                    <%= post.title %></br>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
+        <% end %>
+      <% else %>
+        <div class="row offset-1 py-3">
+          <p>いいねはまだありません。<p>
         </div>
       <% end %>
+ 
+      <%= paginate @posts %>
+    </div>
+  </div>
   
 </div>

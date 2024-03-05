@@ -11,6 +11,12 @@ ja:
         restrict_dependent_destroy:
           has_one: "%{record}が存在しているので削除できません"
           has_many: "%{record}が存在しているので削除できません"
+    attributes:
+      post:
+        title: "タイトル"
+        introduction: "コーディネートのポイント"
+        image: "画像"
+        sex: "性別"
   date:
     abbr_day_names:
     - 日

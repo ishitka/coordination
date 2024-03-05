@@ -1,5 +1,5 @@
 class Public::RelationshipsController < ApplicationController
-   def create
+  def create
     if user_signed_in?
       current_user.follow(params[:user_id])
       redirect_to request.referer

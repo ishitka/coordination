@@ -16,6 +16,7 @@ class Public::RegistrationsController < Devise::RegistrationsController
       flash[:notice] = "新規登録しました。"
       redirect_to new_user_session_path
     else
+      flash[:alert] = @user.errors.full_messages.join(", ")
       redirect_to new_user_registration_path
     end
   end
