@@ -50,6 +50,7 @@ default: &default
 development:
   <<: *default
   compile: true
+  extract_css: true
 
   # Reference: https://webpack.js.org/configuration/dev-server/
   dev_server:
@@ -81,6 +82,7 @@ test:
 
 production:
   <<: *default
+  
 
   # Production depends on precompilation of packs prior to booting for performance.
   compile: false
