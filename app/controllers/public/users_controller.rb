@@ -12,7 +12,7 @@ class Public::UsersController < ApplicationController
 
   def update
     is_matching_login_user
-    if User.update(user_params)
+    if current_user.update(user_params)
       redirect_to user_path(current_user)
     else
       render :edit

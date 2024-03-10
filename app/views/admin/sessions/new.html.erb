@@ -1,28 +1,32 @@
-<div class="container-fluid">
-  <div class="row offset-1 mt-3">
-    <h2>管理者ログイン</h2>
-  </div>
+<div class="full-screen-background" style="background-image:url('/assets/nadin-mario-1gNC4n3QtTs-unsplash'); background-size:cover; ">
+  <div style="background-color: rgba(255, 255, 255, 0.5);">
+    <div class="row offset-1 mt-3">
+      <h2 style="font-family: 'Noto Serif JP'; font-weight: 300;">管理者ログイン</h2>
+    </div>
 
-<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-  <div class="field row offset-3 mt-3">
+    <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+      <div class="field row offset-3 mt-3">
         <%= f.email_field :email, autofocus: true, autocomplete: "email",placeholder:"メールアドレス",style:"width:500px;" %>
-    </div>
+      </div>
 
-    <div class="field row offset-3 mt-3">
+      <div class="field row offset-3 mt-3">
         <%= f.password_field :password, autocomplete: "current-password",placeholder:"パスワード",style:"width:500px;" %>
-    </div>
+      </div>
 
-  <% if devise_mapping.rememberable? %>
-    <div class="field row offset-3 mt-3">
-      <%= f.check_box :remember_me %>
-      <%= f.label :remember_me %>
-    </div>
-  <% end %>
+      <% if devise_mapping.rememberable? %>
+        <div class="field row offset-3 mt-3">
+          <%= f.check_box :remember_me %>
+          <%= f.label :remember_me %>
+        </div>
+      <% end %>
 
-  <div class="actions text-center pt-3">
-      <%= f.submit "ログイン", class: "btn btn-success" ,style:"width:200px;" %>
+      <div class="actions text-center pt-3">
+        <%= f.submit "ログイン", class: "btn btn-success" ,style:"width:200px;" %>
+      </div>
+    <% end %>
+
+    <%= render "admin/shared/links" %>
+
+    <div style="height:150px"></div>
   </div>
-<% end %>
-
-<%= render "admin/shared/links" %>
 </div>

@@ -17,6 +17,10 @@ ja:
         introduction: "コーディネートのポイント"
         image: "画像"
         sex: "性別"
+      user:
+        name: "名前"
+        account: "アカウントID"
+        telephone_number: "電話番号"
   date:
     abbr_day_names:
     - 日

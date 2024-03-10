@@ -1,15 +1,12 @@
-<div class="container-fluid">
+<div class="container-fluid" style="background-image:url('/assets/nadin-mario-1gNC4n3QtTs-unsplash'); background-size:cover;">
+  <div style="background-color: rgba(255, 255, 255, 0.5);">
   <div class="row offset-1 py-3">
-    <h2>投稿詳細</h2>
+    <h2 style="font-family: 'Noto Serif JP'; font-weight: 300;">投稿詳細</h2>
   </div>
   
   <div class="card w-50 mx-auto mt-4 shadow-lg">
     <div class="d-flex flex-row align-items-center">
-      <% if @post.user.image.attached? %>
-        <%= image_tag @post.user.image, size:"100x100", class: "mt-3 rounded-circle"; %>
-      <% else %>
-        <%= image_tag 'no_image', size: "200x200", class: "mt-3 rounded-circle"; %>
-      <% end %>
+      <%= image_tag @post.user.get_image(100,100), class: "mt-3 rounded-circle"; %>
       <div class="d-flex-colmn">
         <%= link_to (@post.user.account), admin_user_path(@post.user), class: "mr-2"; %>
         <%= @post.user.height %>cm / <%= @post.sex %>
@@ -44,7 +41,6 @@
               <%= comment.created_at.strftime('%Y/%m/%d') %></br>
               <%= comment.comment %></br>
               </div>
-              </div>
             </div>
             <% if comment.user == current_user %>
                 <%= link_to "削除", post_comment_path(comment.post, comment), method: :delete %>
@@ -55,6 +51,7 @@
       </div>
     </div>
   </div>
+  </div>
 </div>
 
 <div class="text-center">
@@ -63,6 +60,8 @@
     <%= f.submit "送信する" %>
   <% end %>
 </div>
+
+
 
 
 

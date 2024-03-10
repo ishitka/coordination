@@ -28,11 +28,7 @@
           <tr>
             <td>
               <div class="row">
-              <% if user.image.attached? %>
-                <%= image_tag user.image, size:"100x100", class: "mt-3 rounded-circle"; %>
-              <% else %>
-                <%= image_tag 'no_image', size: "100x100", class: "mt-3 rounded-circle"; %>
-              <% end %>
+              <%= image_tag user.get_image(100,100), class: "mt-3 rounded-circle"; %>
               <div class="col my-auto">
               <%= link_to user.account,user_path(user.id) %></br>
               <%= user.name %>
@@ -42,6 +38,11 @@
           </tr>
         <% end %>
       </tbody>
+        <% if @users.blank? %>
+          <tr>
+            <td colspan="2">検索結果は見つかりません。</td>
+          </tr>
+        <% end %>
     <% else %>
       <tbody>
         <% @posts.each do |post| %>
@@ -66,6 +67,11 @@
             <% end %>
           <% end %>
         <% end %>
+          <% if @posts.blank? %>
+            <tr>
+              <td colspan="5">検索結果は見つかりません。</td>
+            </tr>
+          <% end %>
       </tbody>
     <% end %>
   </table>

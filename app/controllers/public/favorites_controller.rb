@@ -20,7 +20,7 @@ class Public::FavoritesController < ApplicationController
   def redirect_path(favorite, post)
     if request.referrer == root_url
       root_path
-    elsif request.referrer.include?('/favorites')
+    elsif request.referrer.include?('/users')
       request.referrer
     else
       post_path(post)

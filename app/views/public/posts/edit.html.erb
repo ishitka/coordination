@@ -1,55 +1,56 @@
 <div class="container-fluid">
   <div class="row offset-1 py-3">
-    <h2>投稿編集</h2>
+    <h2 style="font-family: 'Noto Serif JP'; font-weight: 300;">投稿編集</h2>
   </div>
-  　<% if @post.errors.any? %>
- 　    <%= @post.errors.count %>件のエラーが発生しました
-      <ul>
-        <% @post.errors.full_messages.each do |message| %>
-          <li><%= message %></li>
-        <% end %>
-      </ul>
-    <% end %>
+  
+  <% if @post.errors.any? %>
+ 　  <%= @post.errors.count %>件のエラーが発生しました
+    <ul>
+      <% @post.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    </ul>
+  <% end %>
     
-<%= form_with model: @post do |f| %>
-  <div class="row offset-3 mt-3">
-    <div class="col-3">
-      <p>写真を選択</p>
+  <%= form_with model: @post do |f| %>
+    <div class="row offset-3 mt-3">
+      <div class="col-3">
+        <p>写真を選択</p>
+      </div>
+      <div class="col-3">
+        <%= f.file_field :image, accept: "image/*" %>
+      </div>
     </div>
-    <div class="col-3">
-      <%= f.file_field :image, accept: "image/*" %>
-    </div>
-  </div>
   
-  <div class="field row offset-3 mt-3">
-    <div class="col-3">
-      <p>タイトル</p>
+    <div class="field row offset-3 mt-3">
+      <div class="col-3">
+        <p>タイトル</p>
+      </div>
+      <div class="col-3">
+        <%= f.text_field :title, style:"width:400px;" %>
+      </div>
     </div>
-    <div class="col-3">
-      <%= f.text_field :title, style:"width:400px;" %>
-    </div>
-  </div>
   
-  <div class="field row offset-3 mt-3">
-    <div class="col-3">
-      <p>コーディネートのポイント</p>
+    <div class="field row offset-3 mt-3">
+      <div class="col-3">
+        <p>コーディネートのポイント</p>
+      </div>
+      <div class="col-3">
+        <%= f.text_area :introduction,style:"width:400px; height:200px;" %>
+      </div>
     </div>
-    <div class="col-3">
-      <%= f.text_area :introduction,style:"width:400px; height:200px;" %>
-    </div>
-  </div>
   
-  <div class="field row offset-3 mt-3">
-    <div class="col-3">
-      <p>性別</p>
+    <div class="field row offset-3 mt-3">
+      <div class="col-3">
+        <p>性別</p>
+      </div>
+      <div class="col-3">
+        <%= f.select :sex, ['man', 'woman', 'unisex'],{include_blank: '選択してください'} %>
+      </div>
     </div>
-    <div class="col-3">
-      <%= f.select :sex, ['man', 'woman', 'unisex'],{include_blank: '選択してください'} %>
-    </div>
-  </div>
   
-  <div class="actions text-center pt-5">
-    <%= f.submit '変更内容を保存', class: "btn btn-success", style:"width:300px;" %>
-  </div>
-<% end %>
+    <div class="actions text-center pt-5">
+      <%= f.submit '変更内容を保存', class: "btn btn-success", style:"width:300px;" %>
+    </div>
+  <% end %>
 </div>

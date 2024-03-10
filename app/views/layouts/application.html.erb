@@ -3,6 +3,13 @@
   <head>
     <title>Coordination</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400..700&family=Sacramento&display=swap')
+    </style>
+    <style>
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400..700&family=Noto+Serif+JP:wght@300;400;900&family=Rock+3D&family=Sacramento&display=swap')
+</style>
+
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
@@ -16,9 +23,9 @@
       <nav class="navbar navbar-expand-lg navbar-light">
         <div class="container">
           <% if admin_signed_in? %>
-            <a class="navbar-brand p-3" , href="<%= admin_posts_path %>" >LOGO</a>
+            <a class="navbar-brand p-3" style="font-family: 'Sacramento'; font-size: 30px;" href="<%= admin_posts_path %>">Coordination</a>
           <% else %>
-            <a class="navbar-brand p-3" href='/'>LOGO</a>
+            <a class="navbar-brand p-3" style="font-family: 'Sacramento'; font-size: 30px;" href='/'>Coordination</a>
           <% end %>
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
                         aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
@@ -64,7 +71,7 @@
                 <% end %>
               </li>
               <li class="nav-item">
-                <%= link_to destroy_user_session_path, method: :delete do %>
+                <%= link_to destroy_admin_session_path, method: :delete do %>
                   <h3 class="text-center text-dark"><i class="fa-solid fa-right-from-bracket"></i></h3>
                   <h6 class="text-center text-dark">log out</h6>
                 <% end %>

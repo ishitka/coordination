@@ -1,6 +1,6 @@
 <div class="container-fluid">
   <div class="row offset-1 py-3">
-    <h2>プロフィール編集</h2>
+    <h2 style="font-family: 'Noto Serif JP'; font-weight: 300;">プロフィール編集</h2>
   </div>
   <%= form_with model: @user ,url:admin_user_path(@user.id) do |f| %>
     <div class="row offset-3 mt-3">
@@ -14,10 +14,10 @@
   
     <div class="row offset-3 mt-3">
       <div class="col-3">
-        <p>ユーザーID</p>
+        <p>名前</p>
       </div>
       <div class="col-3">
-        <%= f.text_field :account, style:"width:400px;" %>
+        <%= f.text_field :name, style:"width:400px;" %>
       </div>
     </div>
   
