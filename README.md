@@ -23,10 +23,15 @@
 ​
 ## 設計書
 　・実装機能リスト（https://docs.google.com/spreadsheets/d/1zO7gg_62V5H1S22jh1467MfUrIF4w82NW19A5ZCAhdU/edit?usp=sharing）
+　
 　・ER図（https://drive.google.com/file/d/1jlE8o1jMsL-T1bi19BHl6AbfsgN09Mi_/view?usp=sharing）
+　
 　・テーブル定義書（https://docs.google.com/spreadsheets/d/1KbJjebxbLM2epNbhu6eIVQjuXuul4pPinqAUTNmXZ48/edit?usp=sharing）
+　
 　・アプリケーション詳細設計書（https://docs.google.com/spreadsheets/d/1lGoGFdXBeIxmZ44yk9Slm_oeg2pVX-Zq6hh4_qZM1dA/edit?usp=sharing）
+　
 　・テスト仕様書（https://docs.google.com/spreadsheets/d/1g_yg7FbaiPKFmeOP83y2db4pulbpFebU/edit?usp=sharing&ouid=108067918289085846284&rtpof=true&sd=true）
+　
 　・WBS（https://docs.google.com/spreadsheets/d/1_u0p_kToWw5aP9kM4aQ-nqC7gn_PF20m6ME7JakIWIU/edit?usp=sharing）
 ​
 ## 開発環境
@@ -39,4 +44,5 @@
 
 ##　使用素材
 ・フリーイラスト素材として以下を使用
+
 　　⚪︎ O-DAN（https://o-dan.net/ja/）
