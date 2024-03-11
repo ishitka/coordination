@@ -2,7 +2,7 @@
 
 class DeviseCreateUsers < ActiveRecord::Migration[6.1]
   def change
-    create_table :users do |t|
+    create_table :user do |t|
       ## Database authenticatable
       t.string :email,              null: false, default: ""
       t.string :encrypted_password, null: false, default: ""
@@ -33,8 +33,8 @@ class DeviseCreateUsers < ActiveRecord::Migration[6.1]
       # t.datetime :locked_at
 
       t.string :name, null: false
-      t.string :account, null: false
-      t.string :telephone_number, null: false
+      t.string :account,limit: 30, null: false
+      t.string :telephone_number,limit: 20, null: false
       t.boolean :is_active, null: false, default: true
       t.integer :height
       t.text :introduction
